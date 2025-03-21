@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Space_Mono } from "next/font/google";
 import "./globals.css";
+import RichTextField from "./components/RichTextField";
 import SessionProvider from "./providers/SessionProvider";
 import { QueryProvider } from "./_providers/QueryProvider";
 
@@ -33,7 +34,10 @@ export default function RootLayout({
         className={`${manrope.variable} ${space_Mono.variable} antialiased`}
       >
         <SessionProvider>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <RichTextField />
+            {children}
+          </QueryProvider>
         </SessionProvider>
       </body>
     </html>
