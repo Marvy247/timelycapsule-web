@@ -1,5 +1,7 @@
-import { LayoutProps } from "@/.next/types/app/layout";
+interface CustomLayoutProps {
+  children: React.ReactNode;
+}
 
-export default function ProtectedLayout({ children }: LayoutProps) {
+export default function ProtectedLayout({ children }: CustomLayoutProps) {
   return <div>{children}</div>;
 }

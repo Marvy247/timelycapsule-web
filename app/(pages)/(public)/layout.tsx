@@ -1,17 +1,10 @@
 "use client";
 
-import { LayoutProps } from "@/.next/types/app/layout";
-/* import { usePathname } from 'next/navigation'; */
+interface CustomLayoutProps {
+  children: React.ReactNode;
+}
 
-export default function PublicLayout({ children }: LayoutProps) {
-  /*  const pathname = usePathname();
-  const isAuthRoute =
-    pathname?.includes('/enter') || pathname?.includes('/join');
-
-  if (isAuthRoute) {
-    return <>{children}</>;
-  } */
-
+export default function PublicLayout({ children }: CustomLayoutProps) {
   return (
     <>
       <main>{children}</main>
