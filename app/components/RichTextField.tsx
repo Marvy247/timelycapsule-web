@@ -1,26 +1,13 @@
 "use client";
 
-import React, { useCallback, memo } from "react";
+import React, { memo } from "react";
 import Image from "next/image";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Import the styles for the editor
 import {
   RiSearchLine,
   RiNotificationLine,
   RiLockLine,
-  RiArrowGoBackFill,
-  RiArrowGoForwardFill,
-  RiBold,
-  RiItalic,
-  RiUnderline,
-  RiStrikethrough,
-  RiAlignLeft,
-  RiAlignCenter,
-  RiAlignRight,
-  RiAlignJustify,
-  RiListUnordered,
-  RiListOrdered,
-  RiIndentDecrease,
-  RiIndentIncrease,
-  RiFontSize,
   RiCameraFill,
 } from "react-icons/ri";
 
@@ -53,24 +40,8 @@ const RichTextField: React.FC<RichTextFieldProps> = memo(
     onSenderNameChange,
     onFundsChange,
     onCurrencyChange,
-    onFileUpload,
     onSubmit,
   }) => {
-    const handleFileUpload = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-          if (file.size > 25 * 1024 * 1024) {
-            alert("File size exceeds 25 MB limit.");
-            return;
-          }
-          onFileUpload(file);
-          alert(`File "${file.name}" uploaded successfully!`);
-        }
-      },
-      [onFileUpload],
-    );
-
     return (
       <div style={{ fontFamily: "Inter, sans-serif" }}>
         <div className="px-4 sm:px-6 lg:px-10">
@@ -103,7 +74,7 @@ const RichTextField: React.FC<RichTextFieldProps> = memo(
                 </a>
 
                 {/* User Profile */}
-                <div className="flex bg-sky-50 rounded-3xl p-1 sm:p-2 items-center space-x-1 sm:space-x-2">
+                <div className="flex bg-sky-50 rounded-3xl sm:px-4 sm:py-2 p-3 items-center space-x-1 sm:space-x-2">
                   <Image
                     alt="User profile picture"
                     className="w-5 h-5 sm:w-8 sm:h-8 rounded-full"
@@ -127,7 +98,7 @@ const RichTextField: React.FC<RichTextFieldProps> = memo(
                 <div>
                   <div className="flex items-center space-x-4 mb-4">
                     <RiLockLine className="text-yellow-600 text-3xl sm:text-4xl" />
-                    <h1 className="text-2xl mt-2 sm:text-2xl font-semibold text-gray-800">
+                    <h1 className="text-2xl mt-2 sm:text-3xl font-semibold text-gray-800">
                       Create Your Time Capsule
                     </h1>
                   </div>
@@ -140,20 +111,20 @@ const RichTextField: React.FC<RichTextFieldProps> = memo(
                 <div className="text-gray-500 mt-6 lg:mt-0 lg:ml-10">
                   <span className="text-sm sm:text-base">Step 1 of 3</span>
                   <div className="flex space-x-2 sm:space-x-4 pt-2 sm:pt-4">
-                    <div className="h-1 w-8 sm:w-12 bg-green-500 rounded-sm"></div>
+                    <div className="h-1 w-8 sm:w-12 bg-green-600 rounded-sm"></div>
                     <div className="h-1 w-8 sm:w-12 bg-green-100 rounded-sm"></div>
                     <div className="h-1 w-8 sm:w-12 bg-green-100 rounded-sm"></div>
                   </div>
                 </div>
               </div>
               <form onSubmit={onSubmit}>
-                <div className="mb-6 mt-8">
-                  <label className="block text-sm sm:text-base text-gray-700 mb-2">
-                    <span className="font-semibold">Capsule Name:</span> Give
-                    your capsule a meaningful title
+                <div className="mb-6 mt-8 ">
+                  <label className="block text-sm sm:text-lg text-gray-700 mb-2">
+                    <span className="font-semibold text-xl">Capsule Name:</span>{" "}
+                    Give your capsule a meaningful title
                   </label>
                   <input
-                    className="w-full p-3 border bg-sky-50 border-gray-300 rounded-lg"
+                    className="w-full p-3 mb-3 border bg-sky-50 border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder-gray-400"
                     placeholder="Name"
                     type="text"
                     value={capsuleName}
@@ -161,43 +132,47 @@ const RichTextField: React.FC<RichTextFieldProps> = memo(
                     required
                   />
                 </div>
-                <div className="mb-6">
+                <div className="mb-24">
                   <label className="block text-sm sm:text-base text-gray-700 mb-2">
-                    <span className="font-semibold">Message (Optional):</span>{" "}
+                    <span className="font-semibold text-xl">
+                      Message (Optional):
+                    </span>{" "}
                     Write something memorable...
                   </label>
-                  <div className="bg-sky-50 border h-80 border-gray-300 rounded-lg p-2">
-                    <div className="flex flex-wrap items-center justify-between bg-white space-x-4 p-2 rounded-lg">
-                      <RiArrowGoBackFill className="text-lg sm:text-2xl" />
-                      <RiArrowGoForwardFill className="text-lg sm:text-2xl" />
-                      <RiBold className="text-lg sm:text-2xl" />
-                      <RiItalic className="text-lg sm:text-2xl" />
-                      <RiUnderline className="text-lg sm:text-2xl" />
-                      <RiStrikethrough className="text-lg sm:text-2xl" />
-                      <RiFontSize className="text-lg sm:text-2xl" />
-                      <RiListUnordered className="text-lg sm:text-2xl" />
-                      <RiListOrdered className="text-lg sm:text-2xl" />
-                      <RiIndentDecrease className="text-lg sm:text-2xl" />
-                      <RiIndentIncrease className="text-lg sm:text-2xl" />
-                      <RiAlignLeft className="text-lg sm:text-2xl" />
-                      <RiAlignCenter className="text-lg sm:text-2xl" />
-                      <RiAlignRight className="text-lg sm:text-2xl" />
-                      <RiAlignJustify className="text-lg sm:text-2xl" />
-                    </div>
-                    <textarea
-                      className="w-full bg-sky-50 p-4 mt-6 rounded-lg italic text-gray-400"
-                      placeholder="Start typing......"
-                      value={message}
-                      onChange={(e) => onMessageChange(e.target.value)}
-                    />
-                  </div>
+
+                  <ReactQuill
+                    value={message}
+                    onChange={onMessageChange}
+                    placeholder="Start Typing..."
+                    modules={{
+                      toolbar: [
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                        ["bold", "italic", "underline", "strike"],
+                        [{ color: [] }, { background: [] }],
+                        [{ align: [] }],
+                        [{ list: "ordered" }, { list: "bullet" }],
+                        [{ indent: "-1" }, { indent: "+1" }],
+                        ["blockquote", "code-block"],
+                        ["link"],
+                        ["image"],
+                        ["clean"],
+                      ],
+                      history: {
+                        delay: 2000,
+                        maxStack: 100,
+                        userOnly: true,
+                      },
+                    }}
+                    className="bg-sky-50 border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all h-80"
+                  />
                 </div>
-                <div className="mb-6">
-                  <label className="block text-sm sm:text-base text-gray-700 font-semibold mb-2">
+
+                <div>
+                  <label className="block text-xl sm:text-xl text-gray-700 font-semibold mb-2">
                     Sender Name
                   </label>
                   <input
-                    className="w-full p-3 border bg-sky-50 border-gray-300 rounded-lg"
+                    className="w-full p-3 border bg-sky-50 border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder-gray-400"
                     placeholder="Enter a name"
                     type="text"
                     value={senderName}
@@ -220,7 +195,6 @@ const RichTextField: React.FC<RichTextFieldProps> = memo(
                     <input
                       type="file"
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                      onChange={handleFileUpload}
                       accept="image/*, video/*"
                     />
                     {/* Upload Icon and Text */}
@@ -243,11 +217,11 @@ const RichTextField: React.FC<RichTextFieldProps> = memo(
                 </div>
               </div>
               <div className="mb-6">
-                <label className="block text-sm sm:text-base text-gray-700 font-semibold mb-2">
+                <label className="block text-xl sm:text-xl text-gray-700 font-semibold mb-2">
                   Attach Funds (Optional)
                 </label>
                 <input
-                  className="w-full p-3 border bg-sky-50 border-gray-300 rounded-lg"
+                  className="w-full p-3 border bg-sky-50 border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder-gray-400"
                   placeholder="Enter amount to include in this capsule (e.g., 0.5 ETH)"
                   type="text"
                   value={funds}
@@ -255,11 +229,11 @@ const RichTextField: React.FC<RichTextFieldProps> = memo(
                 />
               </div>
               <div className="mb-6">
-                <label className="block text-sm sm:text-base text-gray-700 font-semibold mb-2">
+                <label className="block text-xl sm:text-xl text-gray-700 font-semibold mb-2">
                   Currency
                 </label>
                 <select
-                  className="w-full p-3 border bg-sky-50 border-gray-300 rounded-lg"
+                  className="w-full p-3 border bg-sky-50 border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder-gray-400"
                   value={currency}
                   onChange={(e) => onCurrencyChange(e.target.value)}
                 >
