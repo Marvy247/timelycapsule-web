@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo } from "react"; // Updated import statement
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Import the styles for the editor
 
