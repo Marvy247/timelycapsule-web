@@ -4,6 +4,7 @@
 
 /* Global styles */
 body {
+  padding: 3rem;
   margin: 0;
   font-family: "Inter", sans-serif;
 }
@@ -28,7 +29,22 @@ select {
 
 /* RichTextField specific styles */
 .ql-container {
-  @apply text-2xl font-extrabold mb-2 text-gray-900;
+  border-radius: 0 0 0.375rem 0.375rem; /* Rounded corners */
+  border: 1px solid #d1d5db; /* Light gray border */
+  @apply text-base font-normal mb-2 text-gray-800; /* Adjusted font size */
+}
+
+.ql-editor {
+  padding: 1rem; /* Add padding */
+  min-height: 200px; /* Default minimum height */
+  height: 100%; /* Make it responsive */
+}
+
+.ql-toolbar {
+  border: 1px solid #d1d5db; /* Light gray border */
+  border-radius: 0.375rem 0.375rem 0 0; /* Rounded corners */
+  padding: 0.5rem; /* Add padding */
+  background-color: #fff;
 }
 
 /* New styles for RichTextField */
@@ -37,4 +53,24 @@ select {
   line-height: 1.5; /* Adjust line height for better spacing */
   transform: translateY(5px); /* Move the placeholder down */
   color: #9ca3af; /* Light gray placeholder text */
+}
+
+/* Responsive height adjustments */
+@media (min-width: 640px) {
+  .ql-editor {
+    min-height: 300px; /* Larger height for tablets and desktops */
+  }
+}
+
+@media (min-width: 1024px) {
+  .ql-editor {
+    min-height: 400px; /* Even larger height for larger screens */
+  }
+}
+
+/* Adjust height for smaller screens */
+@media (max-width: 639px) {
+  .ql-editor {
+    min-height: 400px; /* Smaller height for mobile devices */
+  }
 }
